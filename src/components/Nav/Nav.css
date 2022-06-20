@@ -1,0 +1,16 @@
+#navBar #navLogo {
+  opacity: 0;
+}
+
+#navBar.fixedToTop {
+  opacity: 1;
+  background-color: #16191a;
+  @apply border-opacity-20;
+  @apply transition-all ease-in-out duration-200;
+}
+
+#navBar.fixedToTop #navLogo {
+  opacity: 1;
+  height: auto;
+  @apply transition-opacity ease-in-out duration-200;
+}
