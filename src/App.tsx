@@ -13,11 +13,11 @@ function App() {
   const [scrolledToNav, setScrolledToNav] = useState<boolean>(false)
 
   const watchScroll = ():void => {
-    const scrolled = document.body.scrollTop || document.documentElement.scrollTop
+    const scrolled = Math.ceil(document.body.scrollTop || document.documentElement.scrollTop)
     const element = document.getElementById('navBar');
 
     if (element) {
-      const topPos = element.getBoundingClientRect().top + window.scrollY;
+      const topPos = Math.ceil(element.getBoundingClientRect().top + window.scrollY);
       setScrolledToNav(scrolled === topPos)
     }
   }
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <>
-      <header className='container px-6 pt-6 mx-auto max-w-screen-md pt-0 lg:pt-24'>
+      <header className='container px-6 pt-12 mx-auto max-w-screen-md pt-0 lg:pt-24'>
         <Header />
       </header>   
       <nav className='sticky top-0 z-50'>
