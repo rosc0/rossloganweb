@@ -13,7 +13,7 @@ function NavList( { showMenu } : NavListProps ) {
 
   const sections = [
     {
-      id: 'about',
+      id: 'aboutMe',
       name: 'About',
     },
     {

@@ -26,7 +26,7 @@ function About() {
 
   return (
     <>
-      <Title text='About Me' />
+      <Title text='About Me' id='aboutMe' />
       <div className='w-full lg:flex'>
         <div className='w-full lg:w-1/3 xl:w-1/4'>
           <img
@@ -52,7 +52,7 @@ function About() {
           afraid to learn something new to help you.
           <br />
           <br />
-          <button className='text-white underline underline-offset-2' onClick={sendEmail}>Send me an email</button> so we can look at how I can help you with any projects you might have.
+          <button className='text-white underline underline-offset-2' onClick={sendEmail}>Send me an email</button> so we can talk about how I can help you with any projects you might have.
         </p>
       </div>
     </>
