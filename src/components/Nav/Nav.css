@@ -1,5 +1,0 @@
-#navBar.fixedToTop #navLogo {
-  opacity: 1;
-  height: auto;
-  @apply transition-opacity ease-in-out duration-200;
-}

@@ -1,15 +1,8 @@
 import { useState, useEffect } from 'react'
-import mePic from '../assets/me.jpg'
+import mePic from '../../assets/me.jpg'
 
-import Title from './Title'
-
-interface HighlightProps {
-  text: string
-}
-
-const Highlight = ({ text }: HighlightProps) => {
-  return <span className='text-sky-500'>{text}</span>
-}
+import Title from '../Title'
+import AboutHighlight from './AboutHighlight'
 
 function About() {
   const [years, setYears] = useState<number | null>(null)
@@ -43,16 +36,16 @@ function About() {
           />
         </div>
         <p className='m-auto pl-0 pt-12 w-full text-gray-400 text-justify text-xl lg:pt-0 lg:pl-16 lg:w-2/3 xl:w-3/4'>
-          My name is <Highlight text='Ross Logan' /> and I am a <Highlight text='frontend web developer' />.
+          My name is <AboutHighlight text='Ross Logan' /> and I am a <AboutHighlight text='frontend web developer' />.
           <br />
           <br />
-          I started developing websites in 2008, giving me about <Highlight text={`${years} years experience`} />. I have worked for
+          I started developing websites in 2008, giving me about <AboutHighlight text={`${years} years experience`} />. I have worked for
           different companies here in New Zealand and in Amsterdam where I lived
           for 6 years.
           <br />
           <br />
           Over the years I have learnt a lot of different web technologies, but
-          my passion is with <Highlight text='JavaScript' />, <Highlight text='React' /> and <Highlight text='React Native' />.
+          my passion is with <AboutHighlight text='JavaScript' />, <AboutHighlight text='React' /> and <AboutHighlight text='React Native' />.
           <br />
           <br />
           I have experience with with a range of technologies and I am not

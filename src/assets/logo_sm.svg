@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <svg version="1.1" viewBox="0 0 467.94 56.11">
-<defs>
-<font id="a" horiz-adv-x="1024" horiz-origin-x="0" horiz-origin-y="0" vert-adv-y="90" vert-origin-x="45" vert-origin-y="90">
-<font-face font-family="SVGFont 1" units-per-em="1024"/>
-<missing-glyph d="M0,0h1000v1024h-1000z"/>
-</font>
-</defs>
 <g transform="translate(-240.56 -428.16)">
 <text x="254.28571" y="438.07648" fill="#000000" font-family="Ubuntu" font-size="50px" font-weight="500" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="254.28571" y="438.07648"/></text>
 <text x="414.28571" y="578.07648" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="414.28571" y="578.07648"/></text>
@@ -20,7 +13,6 @@
 <path d="m257.4 444.3h24.28l-4.8e-4 -3.2047h-24.28z" fill="#0ea5e9" fill-rule="evenodd"/>
 <path d="m257.39 438.96h24.281l-4.7e-4 -3.2047h-24.28z" fill="#0ea5e9" fill-rule="evenodd"/>
 <text x="596.95911" y="472.54541" fill="#000000" font-family="sans-serif" font-size="40px" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="line-height:125%" xml:space="preserve"><tspan x="596.95911" y="472.54541"/></text>
-
 <rect x="647.06" y="444.4" opacity="0"/>
 </g>
 </svg>

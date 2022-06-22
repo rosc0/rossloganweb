@@ -1,4 +1,4 @@
-import Title from './Title'
+import Title from '../Title'
 
 function Capabilities() {
   const capabilities = [
