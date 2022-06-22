@@ -1,12 +1,35 @@
+import { useContext } from 'react'
+import NavContext from '../../context/NavContext'
+
 import NavListItem from './NavListItem'
 
 interface NavListProps {
-  scrolledToNav: boolean,
   showMenu: boolean,
-  sections: Array<{ id: string; name: string; }>,
 }
 
-function NavList( { scrolledToNav, sections, showMenu } : NavListProps ) {
+function NavList( { showMenu } : NavListProps ) {
+
+  const { scrolledToNav } = useContext(NavContext) 
+
+  const sections = [
+    {
+      id: 'about',
+      name: 'About',
+    },
+    {
+      id: 'capabilities',
+      name: 'Capabilities',
+    },
+    {
+      id: 'myWork',
+      name: 'My Work',
+    },
+    {
+      id: 'contact',
+      name: 'Contact',
+    },
+  ] 
+
   return (
     <ul className={`text-white ${showMenu ? (scrolledToNav ? 'block' : 'flex') : 'hidden lg:flex'}`}>
       {sections.map((section, index) => {
