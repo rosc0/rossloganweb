@@ -4,7 +4,11 @@ import mePic from '../../assets/me.jpg'
 import Title from '../Title'
 import AboutHighlight from './AboutHighlight'
 
-function About() {
+interface AboutProps {
+  aboutMeRef: React.RefObject<HTMLDivElement>
+}
+
+function About({ aboutMeRef }: AboutProps) {
   const [years, setYears] = useState<number | null>(null)
 
   const getYears = (): number => {
@@ -25,8 +29,8 @@ function About() {
   }
 
   return (
-    <>
-      <Title text='About Me' id='aboutMe' />
+    <article ref={aboutMeRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
+      <Title text='About Me' />
       <div className='w-full lg:flex'>
         <div className='w-full lg:w-1/3 xl:w-1/4'>
           <img
@@ -55,7 +59,7 @@ function About() {
           <button className='text-white underline underline-offset-2' onClick={sendEmail}>Send me an email</button> so we can talk about how I can help you with any projects you might have.
         </p>
       </div>
-    </>
+    </article>
   )
 }
 

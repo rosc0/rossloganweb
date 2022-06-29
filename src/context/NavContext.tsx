@@ -6,9 +6,6 @@ interface AppContextInterface {
   menuOpened: boolean;
   dispatch: any;
   pageLocation: string | null;
-  titleLocations: {
-    [key: string]: number;
-  }
 }
 
 const initialState = {
@@ -16,12 +13,6 @@ const initialState = {
   menuOpened: false,
   dispatch: null,
   pageLocation: null,
-  titleLocations: {
-    aboutMe: 0,
-    capabilities: 0,
-    myWork: 0,
-    contact: 0,
-  }
 }
 
 const NavContext = createContext<AppContextInterface>(initialState);

@@ -1,6 +1,10 @@
 import Title from '../Title'
 
-function Capabilities() {
+interface CapabilitiesProps {
+  capabilitiesRef: React.RefObject<HTMLDivElement>
+}
+
+function Capabilities({ capabilitiesRef }: CapabilitiesProps) {
   const capabilities = [
     'Javascript',
     'HTML5',
@@ -23,8 +27,8 @@ function Capabilities() {
   ]
 
   return (
-    <>
-      <Title text='Capabilities' id='capabilities' />
+    <article ref={capabilitiesRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
+      <Title text='Capabilities' />
       <div className='grid grid-cols-2 gap-8 md:grid-cols-3 xl:grid-cols-6'>
         {capabilities.map((capability, index) => {
           return (
@@ -34,7 +38,7 @@ function Capabilities() {
           )
         })}
       </div>
-    </>
+    </article>
   )
 }
 

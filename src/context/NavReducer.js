@@ -15,16 +15,6 @@ const navReducer = (state, action) => {
         ...state,
         menuOpened: false,
       }
-    case 'SET_MENU_ITEM':
-      return {
-        ...state,
-        pageLocation: action.payload,
-      }
-    case 'SET_TITLE_LOCATIONS':
-      return {
-        ...state,
-        titleLocations: action.payload,
-      }
     default:
       return state
   }

@@ -1,85 +1,45 @@
-import { useRef, useEffect, useContext } from 'react'
+import { useRef, useContext } from 'react'
+import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg'
 import NavList from './NavList'
 import HamburgerButton from './HamburgerButton'
 
 import NavContext from '../../context/NavContext'
 
-function Nav() {
+interface NavProps {
+  aboutMeRef: React.RefObject<HTMLDivElement>
+  capabilitiesRef: React.RefObject<HTMLDivElement>
+  contactRef: React.RefObject<HTMLDivElement>
+}
 
+function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
   const { scrolledToNav, menuOpened, dispatch } = useContext(NavContext)
+  const navBarRef = useRef<HTMLDivElement>(null)
 
-  const navBarRef = useRef<HTMLDivElement>(null);
+  useScrollPosition(
+    ({ prevPos, currPos }) => {
+      const currentScrolled = Math.ceil(Math.abs(currPos.y))
 
-  // get top position of element
-  const getTopOfElement = (element: Element) : number => {
-    const navBarHeight = navBarRef.current?.clientHeight
+      if (navBarRef.current) {
+        const navTopPos = Math.ceil(
+          navBarRef.current?.getBoundingClientRect().top + window.scrollY
+        )
 
-    let titlePadding = 100
-    if (navBarHeight) {
-      titlePadding += navBarHeight
-    }
-    
-    return Math.ceil(element.getBoundingClientRect().top + window.scrollY) - titlePadding
-  }
-
-  useEffect(() => {
-    const navBar = document.getElementById('navBar')
-    const aboutMe = document.getElementById('aboutMe')
-    const capabilities = document.getElementById('capabilities')
-    const myWork = document.getElementById('myWork')
-    const contact = document.getElementById('contact')
-
-    // watch scroll to check and set actions to scroll
-    const watchScroll = (): void => {
-      
-      const scrolled = Math.ceil(document.body.scrollTop || document.documentElement.scrollTop)
-      
-      if (navBar) {
-        const navTopPos = Math.ceil(navBar.getBoundingClientRect().top + window.scrollY)
-        dispatch({ type: 'SET_SCROLLED_NAV', payload: scrolled === navTopPos })
-        if (navTopPos !== scrolled) {
+        dispatch({
+          type: 'SET_SCROLLED_NAV',
+          payload: currentScrolled === navTopPos,
+        })
+        if (navTopPos !== currentScrolled) {
           dispatch({ type: 'SET_MENU_CLOSED' })
         }
       }
-  
-      if (aboutMe && capabilities && myWork && contact) {
-        const aboutMeTopPos = getTopOfElement(aboutMe)
-        const capabilitiesTopPos = getTopOfElement(capabilities)
-        const myWorkTopPos = getTopOfElement(myWork)
-        const contactTopPos = getTopOfElement(contact)
-
-        dispatch({ type: 'SET_TITLE_LOCATIONS', payload: {
-          aboutMe: aboutMeTopPos,
-          capabilities: capabilitiesTopPos,
-          myWork: myWorkTopPos,
-          contact: contactTopPos,
-        }})
-  
-        if (scrolled >= aboutMeTopPos && scrolled <= capabilitiesTopPos) {
-          // about me
-          dispatch({ type: 'SET_MENU_ITEM', payload: 'aboutMe' })
-        } else if (scrolled >= capabilitiesTopPos && scrolled <= myWorkTopPos) {
-          // capabilities
-          dispatch({ type: 'SET_MENU_ITEM', payload: 'capabilities' })
-        } else if (scrolled >= myWorkTopPos && scrolled <= contactTopPos) {
-          // my work
-          dispatch({ type: 'SET_MENU_ITEM', payload: 'myWork' })
-        } else if (scrolled >= contactTopPos) {
-          // contact
-          dispatch({ type: 'SET_MENU_ITEM', payload: 'contact' })
-        } else {
-          dispatch({ type: 'SET_MENU_ITEM', payload: null })
-        }
-      }
-      
-    }
-
-    window.addEventListener('scroll', watchScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', watchScroll)
-    }
-  }, [dispatch])
+    },
+    [],
+    undefined,
+    false,
+    100
+  )
 
   return (
     <div
@@ -112,12 +72,24 @@ function Nav() {
             }`}
           >
             <HamburgerButton />
-            <NavList showMenu={!scrolledToNav && !menuOpened} />
+            <NavList
+              navBarRef={navBarRef}
+              aboutMeRef={aboutMeRef}
+              capabilitiesRef={capabilitiesRef}
+              contactRef={contactRef}
+              showMenu={!scrolledToNav && !menuOpened}
+            />
           </div>
         </div>
 
         <div className='lg:hidden'>
-          <NavList showMenu={scrolledToNav && menuOpened} />
+          <NavList
+            navBarRef={navBarRef}
+            aboutMeRef={aboutMeRef}
+            capabilitiesRef={capabilitiesRef}
+            contactRef={contactRef}
+            showMenu={scrolledToNav && menuOpened}
+          />
         </div>
       </div>
     </div>
