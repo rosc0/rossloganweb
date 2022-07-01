@@ -12,6 +12,7 @@ function Contact({ contactRef }: ContactProps) {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm()
 
   const [sendSuccess, setSendSuccess] = useState(false)
@@ -25,10 +26,10 @@ function Contact({ contactRef }: ContactProps) {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(data).toString(),
         })
-
         if (sendMail.ok) {
           setSendSuccess(true)
           setSendError(false)
+          reset()
         }
       } catch (error) {
         setSendError(true)
@@ -49,7 +50,7 @@ function Contact({ contactRef }: ContactProps) {
           <input {...register('form-name')} type='hidden' value='contact' />
 
           <div>
-            <label className='block text-gray-300 mb-2' htmlFor='name'>
+            <label className='block text-sm text-bold text-gray-300 mb-2' htmlFor='name'>
               Name
             </label>
           </div>
@@ -68,7 +69,7 @@ function Contact({ contactRef }: ContactProps) {
           </p>
 
           <div>
-            <label className='block text-gray-300 mb-2' htmlFor='name'>
+            <label className='block text-sm text-bold text-gray-300 mb-2' htmlFor='name'>
               Email
             </label>
           </div>
@@ -87,7 +88,7 @@ function Contact({ contactRef }: ContactProps) {
           </p>
 
           <div>
-            <label className='block text-gray-300 mb-2' htmlFor='name'>
+            <label className='block text-sm text-bold text-gray-300 mb-2' htmlFor='name'>
               Message
             </label>
           </div>
