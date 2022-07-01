@@ -19,6 +19,10 @@ function Contact({ contactRef }: ContactProps) {
 
   const onSubmit = async (data: any) => {
     if (data.name !== '' && data.email !== '' && data.message !== '') {
+
+      // add for netlify
+      data['form-name'] = 'contact'
+
       try {
         const sendMail = await fetch('/', {
           method: 'POST',
@@ -50,7 +54,7 @@ function Contact({ contactRef }: ContactProps) {
           onSubmit={handleSubmit(onSubmit)}
           className='mt-16 mx-auto max-w-screen-sm w-full'
         >
-          <input type="hidden" name="form-name" value="contact" />
+          <input type='hidden' name='form-name' value='contact' />
           <div>
             <label className='block text-gray-300 mb-2' htmlFor='name'>
               Name
@@ -116,8 +120,16 @@ function Contact({ contactRef }: ContactProps) {
             >
               Send
             </button>
-            {sendError && <div className='flex-1 pl-8 text-rose-500'>Error sending message</div>}
-            {sendSuccess && <div className='flex-1 pl-8 text-emerald-500'>Message was successfully sent</div>}
+            {sendError && (
+              <div className='flex-1 pl-8 text-rose-500'>
+                Error sending message
+              </div>
+            )}
+            {sendSuccess && (
+              <div className='flex-1 pl-8 text-emerald-500'>
+                Message was successfully sent
+              </div>
+            )}
           </div>
         </form>
       </div>
