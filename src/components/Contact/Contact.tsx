@@ -46,7 +46,7 @@ function Contact({ contactRef }: ContactProps) {
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className='mt-16 mx-auto max-w-screen-sm w-full'>
 
-          <input type='hidden' value='contact' {...register('form-name')} />
+          <input {...register('form-name')} type='hidden' value='contact' />
 
           <div>
             <label className='block text-gray-300 mb-2' htmlFor='name'>
