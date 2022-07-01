@@ -2,10 +2,10 @@ import { createContext, useReducer } from 'react'
 import navReducer from './NavReducer'
 
 interface AppContextInterface {
-  scrolledToNav: boolean;
-  menuOpened: boolean;
-  dispatch: any;
-  pageLocation: string | null;
+  scrolledToNav: boolean
+  menuOpened: boolean
+  dispatch: any
+  pageLocation: string | null
 }
 
 const initialState = {
@@ -15,17 +15,16 @@ const initialState = {
   pageLocation: null,
 }
 
-const NavContext = createContext<AppContextInterface>(initialState);
+const NavContext = createContext<AppContextInterface>(initialState)
 
-export const NavProvider = ({ children } : any) => {
-
+export const NavProvider = ({ children }: any) => {
   const [state, dispatch] = useReducer(navReducer, initialState)
 
   return (
     <NavContext.Provider
       value={{
         ...state,
-        dispatch,       
+        dispatch,
       }}
     >
       {children}
