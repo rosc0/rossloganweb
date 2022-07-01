@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 import Title from '../Title'
 
@@ -7,125 +8,106 @@ interface ContactProps {
 }
 
 function Contact({ contactRef }: ContactProps) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
-  const { name, email, message } = formData
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
+  const [sendSuccess, setSendSuccess] = useState(false)
   const [sendError, setSendError] = useState(false)
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }))
-  }
+  const onSubmit = async (data: any) => {
+    if (data.name !== '' && data.email !== '' && data.message !== '') {
+      try {
+        const sendMail = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString(),
+        })
 
-  const isFormValid = () => {
-
-    // check if all fields are filled
-
-    // check email is valid
-
-    return true
-  }
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
-    setSendError(false)
-
-    const formValid =  isFormValid()
-
-    if (formValid) {
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formData).toString(),
-      })
-      .then(() => {
-  
-      })
-      .catch((error) => {
+        if (sendMail.ok) {
+          setSendSuccess(true)
+          setSendError(false)
+        }
+      } catch (error) {
         setSendError(true)
-      })
+        setSendSuccess(false)
+      }
+    } else {
+      setSendError(true)
+      setSendSuccess(false)
     }
-    
   }
 
   return (
     <article ref={contactRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
       <Title text='Contact' />
-      <div className='text-white'>
-        <p className='text-center'>
-          Let me know how I can help you by filling in the form below. I will
-          get back to you as soon as possible.
-        </p>
-
+      <div>
         <form
           name='contact'
           data-netlify='true'
-          onSubmit={(e) => handleSubmit(e)}
+          onSubmit={handleSubmit(onSubmit)}
           className='mt-16 mx-auto max-w-screen-sm w-full'
         >
-          <div className='mb-6'>
-            <div>
-              <label className='block text-gray-300 mb-2' htmlFor='name'>
-                Name
-              </label>
-            </div>
-            <div>
-              <input
-                type='text'
-                id='name'
-                value={name}
-                onChange={handleChange}
-                className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
-              />
-            </div>
+          <input type="hidden" name="form-name" value="contact" />
+          <div>
+            <label className='block text-gray-300 mb-2' htmlFor='name'>
+              Name
+            </label>
           </div>
+          <input
+            id='name'
+            type='text'
+            {...register('name', { required: true })}
+            className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
+          />
+          <p
+            className={`text-sm text-rose-500 py-2	${
+              errors.name ? 'visible' : 'invisible'
+            }`}
+          >
+            You must enter a name
+          </p>
 
-          <div className='mb-6'>
-            <div>
-              <label className='block text-gray-300 mb-2' htmlFor='name'>
-                Email
-              </label>
-            </div>
-            <div>
-              <input
-                type='email'
-                id='email'
-                value={email}
-                onChange={handleChange}
-                className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
-              />
-            </div>
+          <div>
+            <label className='block text-gray-300 mb-2' htmlFor='name'>
+              Email
+            </label>
           </div>
+          <input
+            id='email'
+            type='email'
+            {...register('email', { pattern: /\S+@\S+\.\S+/, required: true })}
+            className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
+          />
+          <p
+            className={`text-sm text-rose-500 py-2	${
+              errors.email ? 'visible' : 'invisible'
+            }`}
+          >
+            You must enter a valid email
+          </p>
 
-          <div className='mb-6'>
-            <div>
-              <label className='block text-gray-300 mb-2' htmlFor='name'>
-                Message
-              </label>
-            </div>
-            <div>
-              <textarea
-                cols={30}
-                rows={5}
-                name='message'
-                id='message'
-                value={message}
-                onChange={handleChange}
-                className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
-              ></textarea>
-            </div>
+          <div>
+            <label className='block text-gray-300 mb-2' htmlFor='name'>
+              Message
+            </label>
           </div>
+          <textarea
+            cols={30}
+            rows={5}
+            id='message'
+            {...register('message', { required: true })}
+            className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
+          ></textarea>
+          <p
+            className={`text-sm text-rose-500 pb-4	${
+              errors.message ? 'visible' : 'invisible'
+            }`}
+          >
+            You must enter a message
+          </p>
 
           <div className='flex items-center mb-6'>
             <button
@@ -134,7 +116,8 @@ function Contact({ contactRef }: ContactProps) {
             >
               Send
             </button>
-            {sendError && <div className='flex-1 pl-8'>Sorry, Cannot send message.</div>}
+            {sendError && <div className='flex-1 pl-8 text-rose-500'>Error sending message</div>}
+            {sendSuccess && <div className='flex-1 pl-8 text-emerald-500'>Message was successfully sent</div>}
           </div>
         </form>
       </div>
