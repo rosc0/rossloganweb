@@ -57,7 +57,7 @@ function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
             id='navLogo'
             className={`m-auto transition-opacity ease-in-out duration-200 ${
               scrolledToNav
-                ? ' pr-6 py-4 w-6/12 lg:w-4/12 lg:py-0 opacity-100 h-auto'
+                ? ' pr-6 py-4 w-9/12 md:w-6/12 lg:w-4/12 lg:py-0 opacity-100 h-auto'
                 : 'w-0 opacity-0'
             }`}
           >
@@ -67,7 +67,7 @@ function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
           <div
             className={`${
               scrolledToNav
-                ? 'w-6/12 lg:w-8/12 text-right'
+                ? 'w-3/12 md:w-6/12 lg:w-8/12 text-right'
                 : 'w-full text-center'
             }`}
           >
