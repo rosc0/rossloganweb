@@ -24,10 +24,6 @@ function About({ aboutMeRef }: AboutProps) {
     setYears(getYears())
   }, [])
 
-  const sendEmail = (): void => {
-    alert('TODO: Send email')
-  }
-
   return (
     <article ref={aboutMeRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
       <Title text='About Me' />
@@ -43,8 +39,7 @@ function About({ aboutMeRef }: AboutProps) {
           My name is <AboutHighlight text='Ross Logan' /> and I am a{' '}
           <AboutHighlight text='frontend web developer' />.
           <br />
-          <br />
-          I started developing websites in 2008, giving me about{' '}
+          <br />I started developing websites in 2008, giving me about{' '}
           <AboutHighlight text={`${years} years experience`} />. I have worked
           for different companies here in New Zealand and in Amsterdam where I
           lived for 6 years.
@@ -60,14 +55,8 @@ function About({ aboutMeRef }: AboutProps) {
           afraid to learn something new to help you.
           <br />
           <br />
-          <button
-            className='text-white underline underline-offset-2'
-            onClick={sendEmail}
-          >
-            Send me an email
-          </button>{' '}
-          so we can talk about how I can help you with any projects you might
-          have.
+          Contact me below so we can talk about how I can help you with any
+          projects you might have.
         </p>
       </div>
     </article>

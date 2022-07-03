@@ -35,9 +35,6 @@ function Contact({ contactRef }: ContactProps) {
         setSendError(true)
         setSendSuccess(false)
       }
-    } else {
-      setSendError(true)
-      setSendSuccess(false)
     }
   }
 

@@ -2,21 +2,16 @@ import { useContext } from 'react'
 import NavContext from '../../context/NavContext'
 
 interface NavListProps {
-  showMenu: boolean
-  navBarRef: React.RefObject<HTMLDivElement>
-  aboutMeRef: React.RefObject<HTMLDivElement>
-  capabilitiesRef: React.RefObject<HTMLDivElement>
-  contactRef: React.RefObject<HTMLDivElement>
+  showMenu: boolean,
+  navBarRef: React.RefObject<HTMLDivElement>,
+  aboutMeRef: React.RefObject<HTMLDivElement>,
+  capabilitiesRef: React.RefObject<HTMLDivElement>,
+  contactRef: React.RefObject<HTMLDivElement>,
 }
 
-function NavList({
-  showMenu,
-  navBarRef,
-  aboutMeRef,
-  capabilitiesRef,
-  contactRef,
-}: NavListProps) {
-  const { scrolledToNav, dispatch } = useContext(NavContext)
+function NavList( { showMenu, navBarRef, aboutMeRef, capabilitiesRef, contactRef } : NavListProps ) {
+
+  const { scrolledToNav, dispatch } = useContext(NavContext) 
 
   const sections = [
     {
@@ -31,23 +26,23 @@ function NavList({
       shortName: 'contact',
       name: 'Contact',
     },
-  ]
+  ] 
 
   const onNavigate = (navigateTo: string): void => {
     let refElement = undefined
     switch (navigateTo) {
       case 'aboutMe':
         refElement = aboutMeRef
-        break
+        break;
       case 'capabilities':
         refElement = capabilitiesRef
-        break
+        break;
       case 'contact':
         refElement = contactRef
-        break
-
+        break;
+    
       default:
-        break
+        break;
     }
 
     if (refElement && refElement.current) {
@@ -57,11 +52,8 @@ function NavList({
       if (navBarHeight) {
         titlePadding += navBarHeight
       }
-
-      const scrollTo =
-        refElement.current.getBoundingClientRect().top +
-        window.scrollY -
-        titlePadding
+      
+      const scrollTo = refElement.current.getBoundingClientRect().top + window.scrollY - titlePadding
 
       window.scrollTo({
         top: scrollTo,
@@ -73,11 +65,7 @@ function NavList({
   }
 
   return (
-    <ul
-      className={`text-white ${
-        showMenu ? (scrolledToNav ? 'block' : 'flex') : 'hidden lg:flex'
-      }`}
-    >
+    <ul className={`text-white ${showMenu ? (scrolledToNav ? 'block' : 'flex') : 'hidden lg:flex'}`}>
       {sections.map((section, index) => {
         return (
           <li key={index} className='flex-1 text-center block py-2'>
@@ -92,6 +80,7 @@ function NavList({
       })}
     </ul>
   )
+
 }
 
 export default NavList
