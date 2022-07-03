@@ -30,6 +30,9 @@ function Contact({ contactRef }: ContactProps) {
           setSendSuccess(true)
           setSendError(false)
           reset()
+          setTimeout(() => {
+            setSendSuccess(false)
+          }, 3500)
         }
       } catch (error) {
         setSendError(true)
