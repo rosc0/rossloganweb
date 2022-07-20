@@ -5,14 +5,12 @@ interface AppContextInterface {
   scrolledToNav: boolean
   menuOpened: boolean
   dispatch: any
-  pageLocation: string | null
 }
 
 const initialState = {
   scrolledToNav: false,
   menuOpened: false,
   dispatch: null,
-  pageLocation: null,
 }
 
 const NavContext = createContext<AppContextInterface>(initialState)

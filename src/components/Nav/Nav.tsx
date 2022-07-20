@@ -30,6 +30,7 @@ function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
           type: 'SET_SCROLLED_NAV',
           payload: currentScrolled === navTopPos,
         })
+        
         if (navTopPos !== currentScrolled) {
           dispatch({ type: 'SET_MENU_CLOSED' })
         }

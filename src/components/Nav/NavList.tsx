@@ -47,14 +47,13 @@ function NavList( { showMenu, navBarRef, aboutMeRef, capabilitiesRef, contactRef
 
     if (refElement && refElement.current) {
       const navBarHeight = navBarRef.current?.clientHeight
-
+      
       let titlePadding = 50
       if (navBarHeight) {
         titlePadding += navBarHeight
       }
       
       const scrollTo = refElement.current.getBoundingClientRect().top + window.scrollY - titlePadding
-
       window.scrollTo({
         top: scrollTo,
         behavior: 'smooth',
