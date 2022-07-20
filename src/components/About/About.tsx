@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import mePic from '../../assets/me.jpg'
 
 import Title from '../Title'
 import AboutHighlight from './AboutHighlight'
+import MeImage from './MeImage'
 
 interface AboutProps {
   aboutMeRef: React.RefObject<HTMLDivElement>
@@ -28,13 +28,7 @@ function About({ aboutMeRef }: AboutProps) {
     <article ref={aboutMeRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
       <Title text='About Me' />
       <div className='w-full lg:flex'>
-        <div className='w-full lg:w-1/3 xl:w-1/4'>
-          <img
-            src={mePic}
-            alt='Ross Logan'
-            className='m-auto w-2/3 rounded-full lg:w-full shadow-2xl shadow-gray-700'
-          />
-        </div>
+        <MeImage />
         <p className='m-auto pl-0 pt-12 w-full text-gray-400 text-justify text-xl lg:pt-0 lg:pl-16 lg:w-2/3 xl:w-3/4'>
           My name is <AboutHighlight text='Ross Logan' /> and I am a{' '}
           <AboutHighlight text='frontend web developer' />.
