@@ -45,7 +45,7 @@ function Contact({ contactRef }: ContactInterface) {
     <article ref={contactRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
       <Title text='Contact' />
       <div>
-        <form onSubmit={handleSubmit(onSubmit)} className='mt-16 mx-auto max-w-screen-sm w-full'>
+        <form onSubmit={handleSubmit(onSubmit)} className='mt-16 mx-auto max-w-screen-md w-full'>
 
           <input {...register('form-name')} type='hidden' value='contact' />
 

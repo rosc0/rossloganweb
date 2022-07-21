@@ -56,9 +56,9 @@ function Nav({ sections }: NavInterface) {
     <div
       id='navBar'
       ref={navBarRef}
-      className={`w-full mt-12 bg-charcoal-light border-opacity-0 border-b-2 border-t-2 border-t-charcoal border-b-sky-500 lg:mt-24 ${
+      className={`w-full p-1 mt-12 bg-charcoal-light border-opacity-0 border-b-2 border-t-2 border-t-charcoal border-b-charcoal-lightest lg:mt-24 ${
         scrolledToNav
-          ? 'shadow-2xl shadow-charcoal opacity-100 bg-charcoal-light border-opacity-20 transition-all ease-in-out duration-1000'
+          ? 'shadow-2xl shadow-charcoal opacity-100 bg-charcoal-light border-opacity-25 transition-all ease-in-out duration-1000'
           : ''
       }`}
     >
