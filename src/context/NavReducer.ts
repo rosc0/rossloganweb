@@ -1,17 +1,19 @@
-type State = {
-  menuOpened: boolean,
-  scrolledToNav: boolean,
+interface State {
+  menuOpened: boolean
+  activeSection: string | null
+  scrolledToNav: boolean
 }
 
 enum ActionType {
   SET_SCROLLED_NAV = 'SET_SCROLLED_NAV',
   TOGGLE_MENU_STATE = 'TOGGLE_MENU_STATE',
   SET_MENU_CLOSED = 'SET_MENU_CLOSED',
+  SET_ACTIVE_SECTION = 'SET_ACTIVE_SECTION',
 }
 
-type Action = {
+interface Action {
   type: ActionType,
-  payload: boolean
+  payload: any
 }
 
 const navReducer = (state: State, action: Action) => {
@@ -31,6 +33,12 @@ const navReducer = (state: State, action: Action) => {
         ...state,
         menuOpened: false,
       }
+    case 'SET_ACTIVE_SECTION':
+      return {
+        ...state,
+        activeSection: action.payload,
+      }
+   
     default:
       return state
   }

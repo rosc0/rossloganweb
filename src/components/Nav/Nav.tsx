@@ -7,14 +7,16 @@ import HamburgerButton from './HamburgerButton'
 
 import NavContext from '../../context/NavContext'
 
-interface NavProps {
-  aboutMeRef: React.RefObject<HTMLDivElement>
-  capabilitiesRef: React.RefObject<HTMLDivElement>
-  contactRef: React.RefObject<HTMLDivElement>
+interface NavInterface {
+  sections: {
+    name: string
+    shortName: string
+    ref: React.RefObject<HTMLDivElement>
+  }[]
 }
 
-function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
-  const { scrolledToNav, menuOpened, dispatch } = useContext(NavContext)
+function Nav({ sections }: NavInterface) {
+  const { scrolledToNav, menuOpened, /*activeSection,*/ dispatch } = useContext(NavContext)
   const navBarRef = useRef<HTMLDivElement>(null)
 
   useScrollPosition(
@@ -22,24 +24,32 @@ function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
       const currentScrolled = Math.ceil(Math.abs(currPos.y))
 
       if (navBarRef.current) {
-        const navTopPos = Math.ceil(
-          navBarRef.current?.getBoundingClientRect().top + window.scrollY
-        )
+        const navTopPos = Math.ceil(navBarRef.current?.getBoundingClientRect().top + window.scrollY)
 
+        // set scrolledToNav to true if nav is stuck to top of screen
         dispatch({
           type: 'SET_SCROLLED_NAV',
           payload: currentScrolled === navTopPos,
         })
         
+        // close menu when scrolled to top
         if (navTopPos !== currentScrolled) {
           dispatch({ type: 'SET_MENU_CLOSED' })
         }
+
+        // TODO: set activeSection to the section that is currently scrolled to
+        // dispatch({
+        //   type: 'SET_ACTIVE_SECTION',
+        //   payload: '',
+        // })
+
+
       }
     },
     [],
     undefined,
     false,
-    100
+    1
   )
 
   return (
@@ -67,17 +77,13 @@ function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
 
           <div
             className={`${
-              scrolledToNav
-                ? 'w-3/12 md:w-6/12 lg:w-8/12 text-right'
-                : 'w-full text-center'
+              scrolledToNav ? 'w-3/12 md:w-6/12 lg:w-8/12 text-right' : 'w-full text-center'
             }`}
           >
             <HamburgerButton />
             <NavList
               navBarRef={navBarRef}
-              aboutMeRef={aboutMeRef}
-              capabilitiesRef={capabilitiesRef}
-              contactRef={contactRef}
+              sections={sections}
               showMenu={!scrolledToNav && !menuOpened}
             />
           </div>
@@ -86,9 +92,7 @@ function Nav({ aboutMeRef, capabilitiesRef, contactRef }: NavProps) {
         <div className='lg:hidden'>
           <NavList
             navBarRef={navBarRef}
-            aboutMeRef={aboutMeRef}
-            capabilitiesRef={capabilitiesRef}
-            contactRef={contactRef}
+            sections={sections}
             showMenu={scrolledToNav && menuOpened}
           />
         </div>

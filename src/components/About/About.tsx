@@ -4,11 +4,11 @@ import Title from '../Title'
 import AboutHighlight from './AboutHighlight'
 import MeImage from './MeImage'
 
-interface AboutProps {
+interface AboutInterface {
   aboutMeRef: React.RefObject<HTMLDivElement>
 }
 
-function About({ aboutMeRef }: AboutProps) {
+function About({ aboutMeRef }: AboutInterface) {
   const [years, setYears] = useState<number | null>(null)
 
   const getYears = (): number => {

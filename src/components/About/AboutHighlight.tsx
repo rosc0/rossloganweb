@@ -1,8 +1,8 @@
-interface AboutHighlightProps {
+interface AboutHighlightInterface {
   text: string
 }
 
-const AboutHighlight = ({ text }: AboutHighlightProps) => {
+const AboutHighlight = ({ text }: AboutHighlightInterface) => {
   return <span className='text-sky-500'>{text}</span>
 }
 

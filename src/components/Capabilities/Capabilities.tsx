@@ -1,11 +1,11 @@
 import Title from '../Title'
 import CapabilityTile from './CapabilityTile'
 
-interface CapabilitiesProps {
+interface CapabilitiesInterface {
   capabilitiesRef: React.RefObject<HTMLDivElement>
 }
 
-function Capabilities({ capabilitiesRef }: CapabilitiesProps) {
+function Capabilities({ capabilitiesRef }: CapabilitiesInterface) {
   const capabilities = [
     'Javascript',
     'HTML5',

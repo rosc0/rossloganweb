@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form'
 
 import Title from '../Title'
 
-interface ContactProps {
+interface ContactInterface {
   contactRef: React.RefObject<HTMLDivElement>
 }
 
-function Contact({ contactRef }: ContactProps) {
+function Contact({ contactRef }: ContactInterface) {
   const {
     register,
     handleSubmit,
