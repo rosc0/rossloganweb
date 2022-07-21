@@ -49,15 +49,10 @@ function Contact({ contactRef }: ContactInterface) {
 
           <input {...register('form-name')} type='hidden' value='contact' />
 
-          <div>
-            <label className='block text-sm text-bold text-gray-300 mb-2' htmlFor='name'>
-              Name
-            </label>
-          </div>
           <input
-            id='name'
             type='text'
             {...register('name', { required: true })}
+            placeholder='Name'
             className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
           />
           <p
@@ -67,15 +62,10 @@ function Contact({ contactRef }: ContactInterface) {
           >
             You must enter a name
           </p>
-
-          <div>
-            <label className='block text-sm text-bold text-gray-300 mb-2' htmlFor='name'>
-              Email
-            </label>
-          </div>
+          
           <input
-            id='email'
             type='email'
+            placeholder='Email'
             {...register('email', { pattern: /\S+@\S+\.\S+/, required: true })}
             className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
           />
@@ -86,16 +76,11 @@ function Contact({ contactRef }: ContactInterface) {
           >
             You must enter a valid email
           </p>
-
-          <div>
-            <label className='block text-sm text-bold text-gray-300 mb-2' htmlFor='name'>
-              Message
-            </label>
-          </div>
+         
           <textarea
             cols={30}
             rows={5}
-            id='message'
+            placeholder='Message'
             {...register('message', { required: true })}
             className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
           ></textarea>
