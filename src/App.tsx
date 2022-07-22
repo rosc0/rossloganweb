@@ -17,7 +17,7 @@ function App() {
 
   const sections = [
     {
-      name: 'About Me',
+      name: 'About',
       shortName: 'aboutMe',
       ref: aboutMeRef,
     },
@@ -27,7 +27,7 @@ function App() {
       ref: capabilitiesRef,
     },
     {
-      name: 'My Work',
+      name: 'Work',
       shortName: 'myWork',
       ref: myWorkRef,
     },
