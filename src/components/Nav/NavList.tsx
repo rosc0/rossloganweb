@@ -42,7 +42,7 @@ function NavList({ showMenu, navBarRef, sections }: NavListInterface) {
         return (
           <li key={index} className='flex-1 text-center block py-2'>
             <button
-              className={`w-full py-4 lg:rounded-sm hover:text-sky-500 ${
+              className={`w-full py-4 lg:rounded-sm hover:text-sky-500 text-lg ${
                 activeSection === section.shortName
                   ? 'bg-charcoal-lightest'
                   : ''
