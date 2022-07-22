@@ -17,8 +17,6 @@ function NavList({ showMenu, navBarRef, sections }: NavListInterface) {
 
   const onNavigate = (refElement: React.RefObject<HTMLDivElement>): void => {
 
-    dispatch({ type: 'SET_MENU_CLOSED' })
-
     if (refElement && refElement.current) {
       let titlePadding = 50
       if (navBarHeight) {
@@ -31,6 +29,10 @@ function NavList({ showMenu, navBarRef, sections }: NavListInterface) {
         behavior: 'smooth',
       })
     }
+
+    setTimeout(() => {
+      dispatch({ type: 'SET_MENU_CLOSED' })
+    }, 300)
     
   }
 
