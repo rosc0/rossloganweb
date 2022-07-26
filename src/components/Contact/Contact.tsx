@@ -53,7 +53,7 @@ function Contact({ contactRef }: ContactInterface) {
             type='text'
             {...register('name', { required: true })}
             placeholder='Name'
-            className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
+            className='bg-charcoal-light autofill:bg-yellow-200 appearance-none border-b-4 border-sky-500 border-opacity-20 w-full p-4 text-gray-200 focus:outline-none focus:border-opacity-100'
           />
           <p
             className={`text-sm text-rose-500 py-2	${
@@ -67,7 +67,7 @@ function Contact({ contactRef }: ContactInterface) {
             type='email'
             placeholder='Email'
             {...register('email', { pattern: /\S+@\S+\.\S+/, required: true })}
-            className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
+            className='bg-charcoal-light appearance-none border-b-4 border-sky-500 border-opacity-20 w-full p-4 text-gray-200 focus:outline-none focus:border-opacity-100'
           />
           <p
             className={`text-sm text-rose-500 py-2	${
@@ -82,7 +82,7 @@ function Contact({ contactRef }: ContactInterface) {
             rows={5}
             placeholder='Message'
             {...register('message', { required: true })}
-            className='bg-gray-200 appearance-none border-4 border-sky-500 border-opacity-20 rounded w-full p-3 text-gray-700 focus:outline-none focus:border-opacity-100'
+            className='bg-charcoal-light resize-none appearance-none border-b-4 border-sky-500 border-opacity-20 w-full p-4 text-gray-200 focus:outline-none focus:border-opacity-100'
           ></textarea>
           <p
             className={`text-sm text-rose-500 pb-4	${
@@ -95,7 +95,7 @@ function Contact({ contactRef }: ContactInterface) {
           <div className='flex items-center mb-6'>
             <button
               type='submit'
-              className='shadow bg-sky-500 hover:bg-sky-400 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-8 rounded'
+              className='shadow bg-sky-700 hover:bg-sky-500 focus:shadow-outline focus:outline-none text-white font-bold py-4 px-24'
             >
               Send
             </button>
