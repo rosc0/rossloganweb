@@ -1,6 +1,6 @@
 interface State {
   menuOpened: boolean
-  activeSection: string | null
+  activeSection: string
   scrolledToNav: boolean
 }
 

@@ -4,14 +4,14 @@ import navReducer from './NavReducer'
 interface AppContextInterface {
   scrolledToNav: boolean
   menuOpened: boolean
-  activeSection: string | null
+  activeSection: string
   dispatch: any
 }
 
 const initialState = {
   scrolledToNav: false,
   menuOpened: false,
-  activeSection: null,
+  activeSection: '',
   dispatch: null,
 }
 

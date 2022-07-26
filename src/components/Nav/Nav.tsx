@@ -15,8 +15,37 @@ interface NavInterface {
   }[]
 }
 
+// Restrict value to be between the range [0, value]
+const clamp = (value: number) => Math.max(0, value)
+
+// Check if number is between two values
+const isBetween = (value: number, floor: number, ceil: number) => value >= floor && value <= ceil
+
+// positions of sections
+const findActiveSection = (
+  sections: {
+    name: string
+    shortName: string
+    ref: React.RefObject<HTMLDivElement>
+  }[],
+  currentScrolled: number,
+  offset: number
+) => {
+  return sections
+    .map((section) => {
+      if (!section.ref.current) return { section, top: -1, bottom: -1 }
+
+      const rect = section.ref.current.getBoundingClientRect()
+      const top = clamp(rect.top + currentScrolled - offset)
+      const bottom = clamp(rect.bottom + currentScrolled - offset)
+
+      return { section, top, bottom }
+    })
+    .find(({ top, bottom }) => isBetween(currentScrolled, top, bottom))
+}
+
 function Nav({ sections }: NavInterface) {
-  const { scrolledToNav, menuOpened, /*activeSection,*/ dispatch } = useContext(NavContext)
+  const { scrolledToNav, menuOpened, dispatch } = useContext(NavContext)
   const navBarRef = useRef<HTMLDivElement>(null)
 
   useScrollPosition(
@@ -31,19 +60,20 @@ function Nav({ sections }: NavInterface) {
           type: 'SET_SCROLLED_NAV',
           payload: currentScrolled === navTopPos,
         })
-        
+
         // close menu when scrolled to top
         if (navTopPos !== currentScrolled) {
           dispatch({ type: 'SET_MENU_CLOSED' })
         }
 
-        // TODO: set activeSection to the section that is currently scrolled to
-        // dispatch({
-        //   type: 'SET_ACTIVE_SECTION',
-        //   payload: '',
-        // })
-
-
+        const offset = navBarRef.current?.clientHeight + 50
+        const currentScrolledSection = findActiveSection(sections, currentScrolled, offset)
+        const scrolledPosition = currentScrolledSection?.section.shortName
+        
+        dispatch({
+          type: 'SET_ACTIVE_SECTION',
+          payload: scrolledPosition,
+        })
       }
     },
     [],
