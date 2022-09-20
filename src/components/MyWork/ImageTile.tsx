@@ -7,7 +7,7 @@ type ImageTileProps = {
 
 const ImageTile: FC<ImageTileProps> = ({ imageUrl, centered = false }) => {
   return (
-    <div className='h-96 sm:h-64'>
+    <div className='h-96'>
       <div
         className={`w-full h-full bg-cover ${
           centered ? 'bg-center' : 'bg-left-top'
