@@ -1,9 +1,11 @@
-interface AboutHighlightInterface {
-  text: string
-}
+import { FC } from 'react';
 
-const AboutHighlight = ({ text }: AboutHighlightInterface) => {
-  return <span className='text-sky-500'>{text}</span>
-}
+type AboutHighlightProps = {
+  text: string;
+};
 
-export default AboutHighlight
+const AboutHighlight: FC<AboutHighlightProps> = ({ text }) => {
+  return <span className='text-sky-500'>{text}</span>;
+};
+
+export default AboutHighlight;

@@ -1,52 +1,54 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useState, FC, RefObject } from 'react';
+import { useForm } from 'react-hook-form';
 
-import Title from '../Title'
+import Title from '../Title';
 
-interface ContactInterface {
-  contactRef: React.RefObject<HTMLDivElement>
-}
+type ContactProps = {
+  contactRef: RefObject<HTMLDivElement>;
+};
 
-function Contact({ contactRef }: ContactInterface) {
+const Contact: FC<ContactProps> = ({ contactRef }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm()
+  } = useForm();
 
-  const [sendSuccess, setSendSuccess] = useState(false)
-  const [sendError, setSendError] = useState(false)
+  const [sendSuccess, setSendSuccess] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: any): Promise<void> => {
     if (data.name !== '' && data.email !== '' && data.message !== '') {
       try {
         const sendMail = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: new URLSearchParams(data).toString(),
-        })
+        });
         if (sendMail.ok) {
-          setSendSuccess(true)
-          setSendError(false)
-          reset()
+          setSendSuccess(true);
+          setSendError(false);
+          reset();
           setTimeout(() => {
-            setSendSuccess(false)
-          }, 3500)
+            setSendSuccess(false);
+          }, 3500);
         }
       } catch (error) {
-        setSendError(true)
-        setSendSuccess(false)
+        setSendError(true);
+        setSendSuccess(false);
       }
     }
-  }
+  };
 
   return (
     <article ref={contactRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
       <Title text='Contact' />
       <div>
-        <form onSubmit={handleSubmit(onSubmit)} className='mt-16 mx-auto max-w-screen-md w-full'>
-
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className='mt-16 mx-auto max-w-screen-md w-full'
+        >
           <input {...register('form-name')} type='hidden' value='contact' />
 
           <input
@@ -62,7 +64,7 @@ function Contact({ contactRef }: ContactInterface) {
           >
             You must enter a name
           </p>
-          
+
           <input
             type='email'
             placeholder='Email'
@@ -76,7 +78,7 @@ function Contact({ contactRef }: ContactInterface) {
           >
             You must enter a valid email
           </p>
-         
+
           <textarea
             cols={30}
             rows={5}
@@ -113,7 +115,7 @@ function Contact({ contactRef }: ContactInterface) {
         </form>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

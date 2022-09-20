@@ -1,4 +1,4 @@
-import mePic from '../../assets/me.jpg'
+import mePic from '../../assets/me.jpg';
 
 function MeImage() {
   return (
@@ -9,7 +9,7 @@ function MeImage() {
         className='m-auto w-2/3 rounded-full lg:w-full shadow-2xl shadow-gray-700'
       />
     </div>
-  )
+  );
 }
 
-export default MeImage
+export default MeImage;

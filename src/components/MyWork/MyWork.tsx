@@ -1,23 +1,25 @@
-import Title from '../Title'
-import LogoTile from './LogoTile'
-import ImageTile from './ImageTile'
+import { FC, RefObject } from 'react';
 
-import snipperLogo from '../../assets/snipper/logo.png'
-import stadiumImg from '../../assets/snipper/stadium.jpg'
-import tiestoImg from '../../assets/snipper/tiesto.jpg'
+import Title from '../Title';
+import LogoTile from './LogoTile';
+import ImageTile from './ImageTile';
 
-import horshaLogo from '../../assets/horsha/logo.svg'
-import createTrailImg from '../../assets/horsha/create_trail.jpg'
-import discoverImg from '../../assets/horsha/discover.jpg'
-import recordImg from '../../assets/horsha/record.jpg'
-import statsImg from '../../assets/horsha/stats.jpg'
-import trailImg from '../../assets/horsha/trail.jpg'
+import snipperLogo from '../../assets/snipper/logo.png';
+import stadiumImg from '../../assets/snipper/stadium.jpg';
+import tiestoImg from '../../assets/snipper/tiesto.jpg';
 
-interface MyWorkInterface {
-  myWorkRef: React.RefObject<HTMLDivElement>
-}
+import horshaLogo from '../../assets/horsha/logo.svg';
+import createTrailImg from '../../assets/horsha/create_trail.jpg';
+import discoverImg from '../../assets/horsha/discover.jpg';
+import recordImg from '../../assets/horsha/record.jpg';
+import statsImg from '../../assets/horsha/stats.jpg';
+import trailImg from '../../assets/horsha/trail.jpg';
 
-function MyWork({ myWorkRef }: MyWorkInterface) {
+type MyWorkProps = {
+  myWorkRef: RefObject<HTMLDivElement>;
+};
+
+const MyWork: FC<MyWorkProps> = ({ myWorkRef }) => {
   return (
     <article ref={myWorkRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
       <Title text='My Work' />
@@ -51,7 +53,7 @@ function MyWork({ myWorkRef }: MyWorkInterface) {
         </div>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default MyWork
+export default MyWork;

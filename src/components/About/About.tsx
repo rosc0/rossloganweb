@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FC, RefObject } from 'react';
 
-import Title from '../Title'
-import AboutHighlight from './AboutHighlight'
-import MeImage from './MeImage'
+import Title from '../Title';
+import AboutHighlight from './AboutHighlight';
+import MeImage from './MeImage';
 
-interface AboutInterface {
-  aboutMeRef: React.RefObject<HTMLDivElement>
-}
+type AboutProps = {
+  aboutMeRef: RefObject<HTMLDivElement>;
+};
 
-function About({ aboutMeRef }: AboutInterface) {
-  const [years, setYears] = useState<number | null>(null)
+const About: FC<AboutProps> = ({ aboutMeRef }) => {
+  const [years, setYears] = useState<number | null>(null);
 
   const getYears = (): number => {
-    const d = new Date()
-    const thisYear = d.getFullYear()
-    const startYear = 2008
-    const careerBreak = 3
-    const years = thisYear - startYear - careerBreak
-    return years
-  }
+    const d = new Date();
+    const thisYear = d.getFullYear();
+    const startYear = 2008;
+    const careerBreak = 3;
+    const years = thisYear - startYear - careerBreak;
+    return years;
+  };
 
   useEffect(() => {
-    setYears(getYears())
-  }, [])
+    setYears(getYears());
+  }, []);
 
   return (
     <article ref={aboutMeRef} className='mt-16 mb-12 lg:mt-36 lg:mb-20'>
@@ -54,7 +54,7 @@ function About({ aboutMeRef }: AboutInterface) {
         </p>
       </div>
     </article>
-  )
-}
+  );
+};
 
-export default About
+export default About;

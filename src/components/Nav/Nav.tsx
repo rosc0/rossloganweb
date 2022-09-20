@@ -1,86 +1,93 @@
-import { useRef, useContext } from 'react'
-import { useScrollPosition } from '@n8tb1t/use-scroll-position'
+import { useRef, useContext, FC } from 'react';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 
-import { ReactComponent as LogoSVG } from '../../assets/logo.svg'
-import NavList from './NavList'
-import HamburgerButton from './HamburgerButton'
+import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
+import NavList from './NavList';
+import HamburgerButton from './HamburgerButton';
 
-import NavContext from '../../context/NavContext'
+import NavContext from '../../context/NavContext';
 
-interface NavInterface {
-  sections: {
-    name: string
-    shortName: string
-    ref: React.RefObject<HTMLDivElement>
-  }[]
-}
+import { SectionsProps } from '../../App'
+
+type NavProps = {
+  sections: SectionsProps[];
+};
+
+type CurrentSectionProps = {
+  bottom: number;
+  top: number;
+  section: SectionsProps;
+};
 
 // Restrict value to be between the range [0, value]
-const clamp = (value: number) => Math.max(0, value)
+const clamp = (value: number): number => Math.max(0, value);
 
 // Check if number is between two values
-const isBetween = (value: number, floor: number, ceil: number) => value >= floor && value <= ceil
+const isBetween = (value: number, floor: number, ceil: number): boolean =>
+  value >= floor && value <= ceil;
 
 // positions of sections
 const findActiveSection = (
-  sections: {
-    name: string
-    shortName: string
-    ref: React.RefObject<HTMLDivElement>
-  }[],
+  sections: SectionsProps[],
   currentScrolled: number,
   offset: number
-) => {
+): CurrentSectionProps | undefined => {
   return sections
     .map((section) => {
-      if (!section.ref.current) return { section, top: -1, bottom: -1 }
+      if (!section.ref.current) return { section, top: -1, bottom: -1 };
 
-      const rect = section.ref.current.getBoundingClientRect()
-      const top = clamp(rect.top + currentScrolled - offset)
-      const bottom = clamp(rect.bottom + currentScrolled - offset)
+      const rect = section.ref.current.getBoundingClientRect();
+      const top = clamp(rect.top + currentScrolled - offset);
+      const bottom = clamp(rect.bottom + currentScrolled - offset);
 
-      return { section, top, bottom }
+      return { section, top, bottom };
     })
-    .find(({ top, bottom }) => isBetween(currentScrolled, top, bottom))
-}
+    .find(({ top, bottom }) => isBetween(currentScrolled, top, bottom));
+};
 
-function Nav({ sections }: NavInterface) {
-  const { scrolledToNav, menuOpened, dispatch } = useContext(NavContext)
-  const navBarRef = useRef<HTMLDivElement>(null)
+const Nav: FC<NavProps> = ({ sections }) => {
+  const { scrolledToNav, menuOpened, dispatch } = useContext(NavContext);
+  const navBarRef = useRef<HTMLDivElement>(null);
 
   useScrollPosition(
     ({ prevPos, currPos }) => {
-      const currentScrolled = Math.ceil(Math.abs(currPos.y))
+      const currentScrolled = Math.ceil(Math.abs(currPos.y));
 
       if (navBarRef.current) {
-        const navTopPos = Math.ceil(navBarRef.current?.getBoundingClientRect().top + window.scrollY)
+        const navTopPos = Math.ceil(
+          navBarRef.current?.getBoundingClientRect().top + window.scrollY
+        );
 
         // set scrolledToNav to true if nav is stuck to top of screen
         dispatch({
           type: 'SET_SCROLLED_NAV',
           payload: currentScrolled === navTopPos,
-        })
+        });
 
         // close menu when scrolled to top
         if (navTopPos !== currentScrolled) {
-          dispatch({ type: 'SET_MENU_CLOSED' })
+          dispatch({ type: 'SET_MENU_CLOSED' });
         }
 
-        const offset = navBarRef.current?.clientHeight + 50
-        const currentScrolledSection = findActiveSection(sections, currentScrolled, offset)
-        const scrolledPosition = currentScrolledSection?.section.shortName
-        
+        const offset = navBarRef.current?.clientHeight + 50;
+        const currentScrolledSection = findActiveSection(
+          sections,
+          currentScrolled,
+          offset
+        );
+        const scrolledPosition = currentScrolledSection?.section.shortName;
+
         dispatch({
           type: 'SET_ACTIVE_SECTION',
           payload: scrolledPosition,
-        })
+        });
       }
     },
     [],
     undefined,
     false,
     1
-  )
+  );
 
   return (
     <div
@@ -107,7 +114,9 @@ function Nav({ sections }: NavInterface) {
 
           <div
             className={`${
-              scrolledToNav ? 'w-3/12 md:w-6/12 lg:w-8/12 text-right' : 'w-full text-center'
+              scrolledToNav
+                ? 'w-3/12 md:w-6/12 lg:w-8/12 text-right'
+                : 'w-full text-center'
             }`}
           >
             <HamburgerButton />
@@ -128,7 +137,7 @@ function Nav({ sections }: NavInterface) {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

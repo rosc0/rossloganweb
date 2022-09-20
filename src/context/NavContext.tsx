@@ -1,24 +1,28 @@
-import { createContext, useReducer } from 'react'
-import navReducer from './NavReducer'
+import { createContext, useReducer, Dispatch, FC, ReactNode } from 'react';
+import navReducer from './NavReducer';
 
-interface AppContextInterface {
-  scrolledToNav: boolean
-  menuOpened: boolean
-  activeSection: string
-  dispatch: any
-}
+type NavContextType = {
+  scrolledToNav: boolean;
+  menuOpened: boolean;
+  activeSection: string;
+  dispatch: Dispatch<any>;
+};
 
-const initialState = {
+type ChildrenType = {
+  children: ReactNode;
+};
+
+const initialState: NavContextType = {
   scrolledToNav: false,
   menuOpened: false,
   activeSection: '',
-  dispatch: null,
-}
+  dispatch: () => null,
+};
 
-const NavContext = createContext<AppContextInterface>(initialState)
+const NavContext = createContext<NavContextType>(initialState);
 
-export const NavProvider = ({ children }: any) => {
-  const [state, dispatch] = useReducer(navReducer, initialState)
+export const NavProvider: FC<ChildrenType> = ({ children }) => {
+  const [state, dispatch] = useReducer(navReducer, initialState);
 
   return (
     <NavContext.Provider
@@ -29,7 +33,7 @@ export const NavProvider = ({ children }: any) => {
     >
       {children}
     </NavContext.Provider>
-  )
-}
+  );
+};
 
-export default NavContext
+export default NavContext;

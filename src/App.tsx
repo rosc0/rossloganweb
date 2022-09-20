@@ -1,21 +1,27 @@
-import { useRef } from 'react'
+import { useRef, RefObject } from 'react';
 
-import Header from './components/Header'
-import About from './components/About/About'
-import Capabilities from './components/Capabilities/Capabilities'
-import MyWork from './components/MyWork/MyWork'
-import Contact from './components/Contact/Contact'
-import Footer from './components/Footer'
+import Header from './components/Header';
+import About from './components/About/About';
+import Capabilities from './components/Capabilities/Capabilities';
+import MyWork from './components/MyWork/MyWork';
+import Contact from './components/Contact/Contact';
+import Footer from './components/Footer';
 
-import { NavProvider } from './context/NavContext'
+import { NavProvider } from './context/NavContext';
+
+export type SectionsProps = {
+  name: string;
+  shortName: string;
+  ref: RefObject<HTMLDivElement>;
+};
 
 function App() {
-  const aboutMeRef = useRef<HTMLDivElement>(null)
-  const capabilitiesRef = useRef<HTMLDivElement>(null)
-  const myWorkRef = useRef<HTMLDivElement>(null)
-  const contactRef = useRef<HTMLDivElement>(null)
+  const aboutMeRef = useRef<HTMLDivElement>(null);
+  const capabilitiesRef = useRef<HTMLDivElement>(null);
+  const myWorkRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
 
-  const sections = [
+  const sections: SectionsProps[] = [
     {
       name: 'About',
       shortName: 'aboutMe',
@@ -36,7 +42,7 @@ function App() {
       shortName: 'contact',
       ref: contactRef,
     },
-  ]
+  ];
 
   return (
     <NavProvider>
@@ -49,7 +55,7 @@ function App() {
       </main>
       <Footer />
     </NavProvider>
-  )
+  );
 }
 
-export default App
+export default App;
