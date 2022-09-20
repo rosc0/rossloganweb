@@ -45,7 +45,7 @@ const MyWork: FC<MyWorkProps> = ({ myWorkRef }) => {
           description='A ride tracker and social media app and website for horse owners, kind of like Strava, but for horse riders. Users could track their rides and compete on sections of track against other users. Once a ride was tracked you could share it with your friends and engage with others on your news feed. You could also look at your stats, to see how you were improving on certain sections of track.'
           builtWithText='React Native, Redux, AngularJS, GraphQL'
         />
-        <div className='grid grid-cols-1 xl:grid-cols-2 gap-8'>
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8'>
           <ImageTile imageUrl={createTrailImg} />
           <ImageTile imageUrl={discoverImg} />
           <ImageTile imageUrl={recordImg} />
